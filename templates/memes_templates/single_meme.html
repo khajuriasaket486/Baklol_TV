@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load  static %}
+
+{% block  content%}
+
+    <br>
+
+    <div class="container">
+
+        <div class="content-header">
+            <h5><img src="{% static 'icons/menu.png' %}">  {{ meme.tittle }}</h5><hr>
+        </div>
+        <div class="single-meme" >
+            <br>
+            <img src="{{ meme.image.url }}" style="border: 1px solid grey;padding: 2%">
+
+        </div>
+
+    </div>
+
+    <br>
+    <br>
+
+
+{% endblock %}

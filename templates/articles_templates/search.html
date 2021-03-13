@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load  static %}
+
+{% block  content%}
+    <div class="content-header">
+        <h5><img src="{% static 'icons/search.png' %}">  &nbsp; {{ search }}</h5><hr>
+    </div>
+    <div class="container">
+        {% if src %}
+        <div class="row">
+            {% for y in src %}
+            <div class="col-sm-3">
+                <a href="{% url 'articlesapp:single_article' y.id %}">
+                <div class="card" style="width: 16rem;">
+                    <img src="{{ y.image.url }}" class="card-img-top" alt="{{ y.tittle }}">
+                    <div class="card-body">
+                        <h6>{{ y.category }}</h6>
+                        <h5 class="card-text">{{ y.tittle }}</h5>
+                        <span style="color: #2874f0">{{ y.author }}</span>
+                        <span> | {{ y.post_date.date }} {{ y.post_date.time }}</span>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if message %}
+            <br>
+            <img src="{% static 'icons/not-found.png' %}" style="margin-left: 46%"><br><br>
+            <div style="text-align: center">
+                <span style="font-weight: 500;font-size: 16px">{{ message }}</span>
+            </div>
+
+            <br>
+        {% endif %}
+    </div>
+
+{% endblock %}

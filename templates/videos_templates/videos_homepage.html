@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load  static %}
+
+{% block  content%}
+
+    <br>
+
+    <div class="container">
+        <div class="content-header">
+                <h5><img src="{% static 'icons/menu.png' %}">  VIDEOS</h5><hr>
+        </div>
+        <div class="row">
+            {% for x in page_obj %}
+            <div class="col-md-4 meme-col">
+                <h6>{{ x.tittle }}</h6>
+                <iframe width="100%" height="200px" src="{{ x.link }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            {% endfor %}
+            <span style="text-align: center">
+                {% if page_obj.has_previous %}
+                <br><a href="?page={{ page_obj.previous_page_number }}" style="text-decoration: none;font-weight: 500;letter-spacing: 1px;">
+                <img src="{% static 'icons/left-arrow.png' %}" width="14"> Previous
+                </a>
+                {% endif %}
+            &nbsp; &nbsp; &nbsp;
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" style="text-decoration: none;font-weight: 500;letter-spacing: 1px">
+                  Next <img src="{% static 'icons/right-arrow.png' %}" width="14">
+                </a>
+                {% endif %}
+            </span>
+        </div>
+
+    </div>
+
+    <br>
+    <br>
+
+
+{% endblock %}
+

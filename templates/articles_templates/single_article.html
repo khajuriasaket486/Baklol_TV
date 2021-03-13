@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load  static %}
+
+{% block  content%}
+
+    <div class="container">
+
+    <div class="content-header">
+        <h5 style="font-size: 24px"><img src="{% static 'icons/menu.png' %}">  {{ article.tittle }}</h5><hr>
+    </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="article-card">
+                    <div class="card-body">
+                        <img src="{{ article.image.url }}">
+                        <br><br><hr>
+                        <p id="article-p">{{ article.description }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="article-card">
+                    <div class="card-body">
+                        <div class="content-header">
+                            <h5>  TRENDING</h5><hr>
+                        </div>
+                        {% for y in trending_data %}
+                            <div class="col-sm-3">
+                                <a href="{% url 'articlesapp:single_article' y.id %}">
+                                    <div class="card" style="width: 16rem;">
+                                        <img src="{{ y.image.url }}" class="card-img-top" alt="{{ y.tittle }}">
+                                        <div class="card-body">
+                                            <h6>{{ y.category }}</h6>
+                                            <h5 class="card-text">{{ y.tittle }}</h5>
+                                            <span style="color: #2874f0">{{ y.author }}</span>
+                                            <span> | {{ y.post_date.date }} {{ y.post_date.time }}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

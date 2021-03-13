@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load  static %}
+
+{% block  content%}
+
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
+    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></li>
+    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <a href="{% url 'articlesapp:single_carousel_article' slide1.id %}"><img src="{{ slide1.image.url }}" class="d-block w-100" alt="{{ slide1.tittle }}"></a>
+      <div class="carousel-caption d-none d-md-block">
+        <h5>{{ slide1.category }}</h5>
+        <p>{{ slide1.tittle }}</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+        <a href="{% url 'articlesapp:single_carousel_article' slide2.id %}"><img src="{{ slide2.image.url }}" class="d-block w-100" alt="{{ slide2.tittle }}"></a>
+      <div class="carousel-caption d-none d-md-block">
+        <h5>{{ slide2.category }}</h5>
+        <p>{{ slide3.tittle }}</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+        <a href="{% url 'articlesapp:single_carousel_article' slide3.id %}"><img src="{{ slide3.image.url }}" class="d-block w-100" alt="{{ slide3.tittle }}"></a>
+      <div class="carousel-caption d-none d-md-block">
+        <h5>{{ slide3.category }}</h5>
+        <p>{{ slide3.tittle }}</p>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+
+    <div class="content-header">
+                <h5><img src="{% static 'icons/menu.png' %}">  STORIES</h5><hr>
+        </div>
+
+    <div class="container">
+        <div class="row">
+            {% for x in page_obj %}
+            <div class="col-sm-3">
+                <a href="{% url 'articlesapp:single_article' x.id %}">
+                <div class="card">
+                    <img src="{{ x.image.url }}" class="card-img-top" alt="{{ x.tittle }}">
+                    <div class="card-body">
+                        <h6>{{ x.category }}</h6>
+                        <h5 class="card-text">{{ x.tittle }}</h5>
+                        <span style="color: #2874f0">{{ x.author.first_name }} {{ x.author.last_name }}</span>
+                        <span> | {{ x.post_date.date }} {{ x.post_date.time }}</span>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {% endfor %}
+
+            <span style="text-align: center">
+                {% if page_obj.has_previous %}
+                <br><a href="?page={{ page_obj.previous_page_number }}" style="text-decoration: none;font-weight: 500;letter-spacing: 1px;">
+                <img src="{% static 'icons/left-arrow.png' %}" width="14"> Previous
+                </a>
+                {% endif %}
+            &nbsp; &nbsp; &nbsp;
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" style="text-decoration: none;font-weight: 500;letter-spacing: 1px">
+                  Next <img src="{% static 'icons/right-arrow.png' %}" width="14">
+                </a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+
+
+{% endblock %}
